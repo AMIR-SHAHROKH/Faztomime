@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/AMIR-SHAHROKH/faztoumim/main/docs/logo-preview.png" width="90" alt="فازتومیم logo" />
+<img src="https://raw.githubusercontent.com/AMIR-SHAHROKH/Faztomime/main/docs/logo-preview.png" width="90" alt="فازتومیم logo" />
 
 # فازتومیم — Faztoumim
 
@@ -84,7 +84,7 @@ No app download needed. Works on any phone browser. Perfect for gatherings, game
 
 ```bash
 # Clone the repo
-git clone https://github.com/AMIR-SHAHROKH/faztoumim.git
+git clone https://github.com/AMIR-SHAHROKH/Faztomime.git
 cd faztoumim
 
 # Install dependencies
