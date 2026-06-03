@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
-<title>فازتومیم</title>
+<title>فندرسکی</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
@@ -273,6 +273,131 @@ input.code-input{direction:ltr;text-align:center;font-weight:900;letter-spacing:
   100%{opacity:0;transform:translateY(105vh) rotate(var(--spin))}
 }
 .cp{position:absolute;top:0;border-radius:2px;animation:cpfall linear forwards}
+
+/* ─── home screen ambient orbs ──────────── */
+.home-orb{position:fixed;border-radius:50%;pointer-events:none;filter:blur(100px);z-index:0}
+#orb-a{width:26rem;height:26rem;background:#818cf8;opacity:.11;top:-7rem;right:-7rem;animation:orbA 14s ease-in-out infinite}
+#orb-b{width:20rem;height:20rem;background:#f472b6;opacity:.09;bottom:8rem;left:-6rem;animation:orbB 18s ease-in-out infinite 3s}
+#orb-c{width:14rem;height:14rem;background:#34d399;opacity:.07;top:55%;right:0;animation:orbC 11s ease-in-out infinite 6s}
+@keyframes orbA{0%,100%{transform:translate(0,0)}40%{transform:translate(30px,-40px)}70%{transform:translate(-15px,25px)}}
+@keyframes orbB{0%,100%{transform:translate(0,0)}35%{transform:translate(-25px,-20px)}70%{transform:translate(20px,30px)}}
+@keyframes orbC{0%,100%{transform:translate(0,0)}50%{transform:translate(12px,-30px)}}
+
+/* ─── logo float ─────────────────────────── */
+@keyframes logoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+/* ─── home form entrance ─────────────────── */
+@keyframes homeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* ─── mode selector (lobby) ──────────────── */
+.mode-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:.6rem}
+.modecard{
+  padding:.85rem .6rem;border-radius:1rem;
+  border:2px solid rgba(255,255,255,.07);background:rgba(255,255,255,.03);
+  cursor:pointer;text-align:center;transition:border-color .2s,background .2s,transform .1s
+}
+.modecard:active{transform:scale(.96)}
+.modecard.on{border-color:#818cf8;background:rgba(129,140,248,.1)}
+.modecard .mc-emoji{font-size:1.8rem;display:block;margin-bottom:.3rem}
+.modecard .mc-name{font-size:.82rem;font-weight:900;color:#f1f5f9}
+.modecard .mc-sub{font-size:.62rem;color:#58587a;margin-top:.15rem}
+
+/* ─── WHO game ───────────────────────────── */
+.question-box{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);
+  border-radius:1.25rem;padding:1.2rem 1rem;text-align:center
+}
+.question-text{font-size:1.2rem;font-weight:900;color:#f1f5f9;line-height:1.5;margin-top:.3rem}
+.who-q-input{
+  width:100%;padding:.75rem 1rem;margin-top:.6rem;
+  border:1.5px solid rgba(255,255,255,.1);border-radius:.75rem;
+  background:rgba(255,255,255,.05);color:#f1f5f9;font-size:.95rem;font-family:inherit;
+  transition:border-color .2s
+}
+.who-q-input:focus{outline:none;border-color:rgba(129,140,248,.5)}
+.vote-grid{display:grid;grid-template-columns:1fr 1fr;gap:.55rem}
+.vote-btn{
+  padding:.85rem .5rem;border-radius:1rem;border:2px solid rgba(255,255,255,.07);
+  background:rgba(255,255,255,.04);color:#f1f5f9;
+  font-weight:700;font-size:.9rem;font-family:inherit;cursor:pointer;
+  display:flex;align-items:center;gap:.5rem;
+  transition:border-color .2s,background .2s,transform .1s,box-shadow .2s
+}
+.vote-btn:active{transform:scale(.93)}
+.vote-btn:hover{border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.07)}
+.vote-btn.chosen{border-color:#818cf8;background:rgba(129,140,248,.15);box-shadow:0 0 14px rgba(129,140,248,.2)}
+.vote-btn.dimmed{opacity:.25;pointer-events:none}
+.vote-av{width:1.8rem;height:1.8rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:900;color:#fff;flex-shrink:0}
+.vote-name{flex:1;text-align:right}
+@keyframes vbtnIn{from{opacity:0;transform:scale(.88)}to{opacity:1;transform:scale(1)}}
+.who-winner-card{
+  width:100%;border-radius:1.5rem;padding:1.8rem 1.5rem;text-align:center;
+  box-shadow:0 0 0 1px rgba(255,255,255,.06),0 20px 50px rgba(0,0,0,.5)
+}
+.who-winner-name{font-size:2.4rem;font-weight:900;color:#fff;margin-top:.3rem}
+.who-winner-votes{font-size:.9rem;color:rgba(255,255,255,.6);margin-top:.2rem}
+.breakdown-row{
+  display:flex;align-items:center;gap:.5rem;padding:.3rem 0;
+  border-bottom:1px solid rgba(255,255,255,.04)
+}
+.breakdown-row:last-child{border-bottom:none}
+.br-voter{font-size:.82rem;color:#7878a8;flex:1;text-align:right}
+.br-arrow{font-size:.75rem;color:#3a3a5a;flex-shrink:0}
+.br-target{font-size:.88rem;font-weight:700;color:#f1f5f9}
+.shame-row{display:flex;align-items:center;gap:.55rem;padding:.3rem .3rem;border-radius:.4rem}
+.shame-row.top{background:rgba(239,68,68,.08)}
+.shame-fire{font-size:.9rem}
+.shame-name{flex:1;font-weight:700;color:#f1f5f9;text-align:right}
+.shame-count{font-size:.85rem;font-weight:900;color:#f87171}
+.loser-card{border-radius:1.5rem;padding:1.7rem;text-align:center;width:100%;background:linear-gradient(135deg,#7f1d1d,#991b1b)}
+.loser-lbl{font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.55)}
+.loser-name{font-size:2rem;font-weight:900;color:#fff;margin-top:.25rem}
+.loser-score{font-size:.95rem;color:rgba(255,255,255,.55);margin-top:.15rem}
+
+/* ─── خط کیه؟ ───────────────────────────── */
+.wl-scenario-card{border-radius:1.2rem;padding:1rem 1.1rem;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04)}
+.wl-scenario-label{font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-bottom:.35rem}
+.wl-scenario-text{font-size:1rem;font-weight:700;color:#f1f5f9;line-height:1.6}
+textarea.wl-textarea{
+  width:100%;padding:.85rem 1rem;
+  border:1.5px solid rgba(255,255,255,.08);border-radius:.9rem;
+  background:rgba(255,255,255,.04);color:#f1f5f9;font-size:.95rem;font-family:inherit;
+  resize:none;transition:border-color .2s,background .2s;min-height:5.5rem;line-height:1.55
+}
+textarea.wl-textarea::placeholder{color:#58587a}
+textarea.wl-textarea:focus{outline:none;border-color:rgba(129,140,248,.5);background:rgba(255,255,255,.06)}
+.wl-answer-card{
+  padding:.8rem .9rem;border-radius:1rem;
+  border:1.5px solid rgba(255,255,255,.07);background:rgba(255,255,255,.04);
+  margin-bottom:.5rem;cursor:pointer;
+  transition:border-color .18s,background .18s,transform .1s,box-shadow .2s;
+  display:flex;gap:.7rem;align-items:flex-start
+}
+.wl-answer-card:hover{border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.07)}
+.wl-answer-card:active{transform:scale(.97)}
+.wl-answer-card.chosen{border-color:#818cf8;background:rgba(129,140,248,.12);box-shadow:0 0 14px rgba(129,140,248,.2)}
+.wl-answer-card.mine{border-color:rgba(255,255,255,.04);opacity:.35;pointer-events:none}
+.wl-answer-card.winner-highlight{border-color:#facc15;background:rgba(250,204,21,.07);box-shadow:0 0 20px rgba(250,204,21,.18)}
+.wl-answer-card.dimmed{opacity:.25;pointer-events:none}
+.wl-ans-label{
+  width:1.7rem;height:1.7rem;border-radius:.45rem;
+  background:rgba(255,255,255,.08);color:#9090b0;
+  font-size:.72rem;font-weight:900;letter-spacing:.03em;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem
+}
+.wl-answer-card.chosen .wl-ans-label{background:#818cf8;color:#fff}
+.wl-answer-card.winner-highlight .wl-ans-label{background:#facc15;color:#0c0c0c}
+.wl-ans-body{flex:1;min-width:0}
+.wl-ans-text{font-size:.93rem;color:#e0e0f0;line-height:1.55;font-weight:600;word-break:break-word}
+.wl-ans-meta{display:flex;align-items:center;justify-content:space-between;margin-top:.3rem}
+.wl-ans-author{font-size:.68rem;color:#7878a8}
+.wl-ans-votes{font-size:.8rem;font-weight:900;color:#facc15}
+@keyframes wlCardIn{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:none}}
+.wl-ranking-row{display:flex;align-items:center;gap:.55rem;padding:.35rem .4rem;border-radius:.45rem;transition:background .3s}
+.wl-ranking-row.hl{background:rgba(250,204,21,.07)}
+.wl-rank-num{font-weight:900;color:#58587a;font-size:.75rem;min-width:1rem;text-align:left;direction:ltr}
+.wl-rank-name{font-weight:700;color:#f1f5f9;flex:1;text-align:right}
+.wl-rank-pts{font-weight:900;color:#facc15;font-size:.85rem;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -291,9 +416,12 @@ input.code-input{direction:ltr;text-align:center;font-weight:900;letter-spacing:
 
 <!-- ── خانه ─────────────────────────────────────── -->
 <section id="screen-home" class="screen active">
-  <div class="logo-block">
+  <div id="orb-a" class="home-orb"></div>
+  <div id="orb-b" class="home-orb"></div>
+  <div id="orb-c" class="home-orb"></div>
+  <div class="logo-block" style="animation:homeIn .6s ease both">
     <!-- Split-face comedy/tragedy logo -->
-    <svg width="76" height="76" viewBox="0 0 76 76" xmlns="http://www.w3.org/2000/svg">
+    <svg width="76" height="76" viewBox="0 0 76 76" xmlns="http://www.w3.org/2000/svg" style="animation:logoFloat 5s ease-in-out infinite">
       <defs>
         <linearGradient id="starGrad" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stop-color="#818cf8"/>
@@ -323,14 +451,14 @@ input.code-input{direction:ltr;text-align:center;font-weight:900;letter-spacing:
       <circle cx="16" cy="18" r="1.8" fill="#818cf8" opacity=".7"/>
       <circle cx="13" cy="25" r="1.1" fill="#f472b6" opacity=".5"/>
     </svg>
-    <h1 class="grad">فازتومیم</h1>
-    <p class="sub">مود رو بازی کن — بذار حدس بزنن</p>
+    <h1 class="grad">فندرسکی</h1>
+    <p class="sub"> بذار حدس بزنن </p>
   </div>
   <div style="display:flex;flex-direction:column;gap:.6rem;margin-top:.3rem">
-    <input id="home-name" type="text" placeholder="اسمت چیه؟" maxlength="20" autocomplete="off"/>
-    <button class="btn pulse-btn" id="btn-create">ساخت اتاق جدید</button>
-    <div class="divider" style="margin:.1rem 0">یا وارد اتاق شو</div>
-    <div class="row">
+    <input id="home-name" type="text" placeholder="اسمت چیه؟" maxlength="20" autocomplete="off" style="animation:homeIn .5s .15s ease both"/>
+    <button class="btn pulse-btn" id="btn-create" style="animation:homeIn .5s .25s ease both">ساخت اتاق جدید</button>
+    <div class="divider" style="margin:.1rem 0;animation:homeIn .5s .35s ease both">یا وارد اتاق شو</div>
+    <div class="row" style="animation:homeIn .5s .42s ease both">
       <input id="join-code" class="code-input" type="text" placeholder="XXXX" maxlength="4" autocomplete="off"/>
       <button class="btn btn-sm" id="btn-join">ورود</button>
     </div>
@@ -348,6 +476,29 @@ input.code-input{direction:ltr;text-align:center;font-weight:900;letter-spacing:
     <p class="card-title">بازیکنا</p>
     <div id="lobby-players"></div>
   </div>
+  <!-- game mode picker (host only, shown by JS) -->
+  <div id="mode-picker" class="hidden">
+    <p class="lbl" style="margin-bottom:.4rem">بازی رو انتخاب کن</p>
+    <div class="mode-row">
+      <div class="modecard on" id="mode-faztoumim" onclick="selectMode('faztoumim')">
+        <span class="mc-emoji">🎭</span>
+        <div class="mc-name">فازتومیم</div>
+        <div class="mc-sub">مود بازی کن</div>
+      </div>
+      <div class="modecard" id="mode-who" onclick="selectMode('who')">
+        <span class="mc-emoji">🫵</span>
+        <div class="mc-name">کدوم‌تون؟</div>
+        <div class="mc-sub">بیشتر احتمال داره</div>
+      </div>
+      <div class="modecard" id="mode-wl" onclick="selectMode('wl')">
+        <span class="mc-emoji">🎤</span>
+        <div class="mc-name">خط کیه؟</div>
+        <div class="mc-sub">بامزه‌ترین جواب</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- faztoumim options -->
   <div id="rounds-picker" class="rounds-row hidden">
     <span class="rounds-lbl">دور برای هر نفر</span>
     <div class="rounds-ctrl">
@@ -356,6 +507,27 @@ input.code-input{direction:ltr;text-align:center;font-weight:900;letter-spacing:
       <button class="rbtn" id="btn-rounds-plus">+</button>
     </div>
   </div>
+
+  <!-- wl options -->
+  <div id="wl-rounds-picker" class="rounds-row hidden">
+    <span class="rounds-lbl">تعداد دورها</span>
+    <div class="rounds-ctrl">
+      <button class="rbtn" id="btn-wl-rounds-minus">−</button>
+      <span id="wl-rounds-val">۸</span>
+      <button class="rbtn" id="btn-wl-rounds-plus">+</button>
+    </div>
+  </div>
+
+  <!-- who options -->
+  <div id="who-rounds-picker" class="rounds-row hidden">
+    <span class="rounds-lbl">تعداد سوال‌ها</span>
+    <div class="rounds-ctrl">
+      <button class="rbtn" id="btn-who-rounds-minus">−</button>
+      <span id="who-rounds-val">۱۰</span>
+      <button class="rbtn" id="btn-who-rounds-plus">+</button>
+    </div>
+  </div>
+
   <button class="btn pulse-btn" id="btn-start">شروع بازی</button>
   <p id="lobby-hint" class="hint"></p>
   <button class="btn-ghost" id="btn-leave-lobby">ترک اتاق</button>
@@ -475,6 +647,218 @@ input.code-input{direction:ltr;text-align:center;font-weight:900;letter-spacing:
   <button class="btn-ghost" id="btn-exit-end">خروج از بازی</button>
 </section>
 
+<!-- ══════════════════════════════════════════ -->
+<!-- ── کدوم‌تون بیشتر احتمال داره؟ screens ── -->
+<!-- ══════════════════════════════════════════ -->
+
+<!-- ── آماده‌سازی سوال (میزبان) ───────────── -->
+<section id="screen-who-preparing" class="screen" style="align-items:center">
+  <div id="who-prep-host" class="hidden" style="width:100%;display:flex;flex-direction:column;gap:.8rem">
+    <div class="tc">
+      <p class="lbl">سوال پیشنهادی</p>
+      <div class="question-box" style="margin-top:.35rem">
+        <p id="who-prep-question" class="question-text">...</p>
+      </div>
+    </div>
+    <div>
+      <p class="lbl" style="margin-bottom:.3rem">یا سوال خودت رو بنویس:</p>
+      <input id="who-custom-q" class="who-q-input" type="text" placeholder="سوال دلخواه..." maxlength="120" autocomplete="off"/>
+    </div>
+    <button class="btn pulse-btn" id="btn-who-launch">نمایش سوال به همه 👁</button>
+  </div>
+  <div id="who-prep-others" class="hidden" style="text-align:center;padding-top:2rem;display:flex;flex-direction:column;gap:1rem;align-items:center;width:100%">
+    <span style="font-size:5rem">🎯</span>
+    <p style="font-size:1.5rem;font-weight:900;color:#f1f5f9">میزبان داره سوال رو آماده می‌کنه...</p>
+    <p class="hint">منتظر بمون!</p>
+  </div>
+</section>
+
+<!-- ── رأی‌گیری ───────────────────────────── -->
+<section id="screen-who-voting" class="screen">
+  <div class="question-box">
+    <p class="lbl">کدوم‌تون بیشتر احتمال داره که...</p>
+    <p id="who-voting-question" class="question-text">...</p>
+  </div>
+  <div id="who-vote-grid" class="vote-grid"></div>
+  <div id="who-voted-area" class="card tc hidden">
+    <p class="lbl" style="margin-bottom:.5rem">کی رأی داده؟</p>
+    <div class="voter-dots" id="who-voted-dots"></div>
+    <p id="who-voted-text" class="hint" style="margin-top:.45rem"></p>
+  </div>
+</section>
+
+<!-- ── تساوی (sudden death) ───────────────── -->
+<section id="screen-who-tiebreak" class="screen">
+  <div class="question-box" style="border-color:rgba(251,146,60,.3)">
+    <p class="lbl" style="color:#fb923c">⚡ تساوی! دوباره رأی بده</p>
+    <p id="who-tb-question" class="question-text">...</p>
+  </div>
+  <p class="hint">فقط بین اینا انتخاب کن:</p>
+  <div id="who-tb-grid" class="vote-grid"></div>
+  <div id="who-tb-voted-area" class="card tc hidden">
+    <p class="lbl" style="margin-bottom:.5rem">رأی‌ها</p>
+    <div class="voter-dots" id="who-tb-voted-dots"></div>
+    <p id="who-tb-voted-text" class="hint" style="margin-top:.45rem"></p>
+  </div>
+</section>
+
+<!-- ── نتیجه دور ──────────────────────────── -->
+<section id="screen-who-reveal" class="screen" style="align-items:center">
+  <p class="lbl tc">بیشتر احتمال داره:</p>
+  <div id="who-winner-card" class="who-winner-card pop">
+    <div style="font-size:3.5rem">🫵</div>
+    <div id="who-winner-name" class="who-winner-name">—</div>
+    <div id="who-winner-votes" class="who-winner-votes"></div>
+  </div>
+  <div class="card" style="width:100%">
+    <p class="card-title">کی به کی رأی داد</p>
+    <div id="who-breakdown"></div>
+  </div>
+  <div class="card" style="width:100%">
+    <p class="card-title">امتیاز شرم 🔥</p>
+    <div id="who-shame-list"></div>
+  </div>
+  <button class="btn hidden" id="btn-who-next">سوال بعدی ←</button>
+  <p class="hint hidden" id="who-next-wait">منتظر میزبان...</p>
+</section>
+
+<!-- ── پایان بازی کدوم‌تون ─────────────────── -->
+<section id="screen-who-ended" class="screen" style="align-items:center">
+  <div class="tc">
+    <span style="font-size:3.5rem">🔥</span>
+    <h1 style="font-size:1.9rem;margin-top:.3rem" class="grad">بازی تموم شد!</h1>
+  </div>
+  <div id="who-loser-card" class="loser-card pop">
+    <p class="loser-lbl">بدبخت‌ترین نفر 💀</p>
+    <p id="who-loser-name" class="loser-name">—</p>
+    <p id="who-loser-count" class="loser-score"></p>
+  </div>
+  <div class="card" style="width:100%">
+    <p class="card-title">جدول شرم نهایی 🔥</p>
+    <div id="who-final-shame"></div>
+  </div>
+  <div id="who-again-picker" class="rounds-row hidden" style="width:100%">
+    <span class="rounds-lbl">تعداد سوال‌ها</span>
+    <div class="rounds-ctrl">
+      <button class="rbtn" id="btn-who-again-minus">−</button>
+      <span id="who-again-val">۱۰</span>
+      <button class="rbtn" id="btn-who-again-plus">+</button>
+    </div>
+  </div>
+  <button class="btn hidden" id="btn-who-play-again">دوباره بازی! 🔥</button>
+  <p class="hint hidden" id="who-ended-wait">منتظر میزبان...</p>
+  <button class="btn-ghost" id="btn-who-exit">خروج از بازی</button>
+</section>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- ── خط کیه؟ screens ────────────────────── -->
+<!-- ══════════════════════════════════════════ -->
+
+<!-- ── نوشتن جواب ─────────────────────────── -->
+<section id="screen-wl-writing" class="screen">
+  <div class="tc">
+    <p class="lbl" style="margin-bottom:.2rem">موقعیت رو بخون، بامزه‌ترین جوابتو بنویس 🎤</p>
+  </div>
+  <div class="wl-scenario-card" style="border-color:rgba(129,140,248,.35)">
+    <p class="wl-scenario-label" style="color:#818cf8">🎬 موقعیت یک</p>
+    <p id="wl-scenario-a" class="wl-scenario-text">...</p>
+  </div>
+  <div class="wl-scenario-card" style="border-color:rgba(244,114,182,.35)">
+    <p class="wl-scenario-label" style="color:#f472b6">🎭 موقعیت دو</p>
+    <p id="wl-scenario-b" class="wl-scenario-text">...</p>
+  </div>
+  <div id="wl-input-area">
+    <p class="lbl" style="margin-bottom:.4rem">جوابت چیه؟ 👇</p>
+    <textarea id="wl-answer-input" class="wl-textarea" placeholder="بامزه‌ترین یا خلاقانه‌ترین جوابتو بنویس..." maxlength="280" rows="3"></textarea>
+    <button class="btn pulse-btn" id="btn-wl-submit" style="margin-top:.55rem">ثبت جواب ✓</button>
+  </div>
+  <div id="wl-writing-submitted" class="card tc hidden">
+    <p class="lbl" style="margin-bottom:.55rem">جوابت ثبت شد! منتظر بقیه...</p>
+    <div class="voter-dots" id="wl-write-dots"></div>
+    <p id="wl-write-count" class="hint" style="margin-top:.4rem"></p>
+  </div>
+  <div id="wl-host-skip" class="hidden">
+    <button class="btn-ghost" id="btn-wl-skip-to-vote" style="font-size:.88rem">رفتیم به رأی‌گیری ⏭</button>
+  </div>
+</section>
+
+<!-- ── رأی‌گیری ───────────────────────────── -->
+<section id="screen-wl-voting" class="screen">
+  <div class="card" style="padding:.75rem .9rem">
+    <p class="lbl" style="margin-bottom:.3rem;color:#818cf8">🎬 موقعیت یک</p>
+    <p id="wl-vote-scenario-a" style="font-size:.88rem;color:#c0c0e0;line-height:1.5">...</p>
+    <p class="lbl" style="margin-bottom:.3rem;color:#f472b6;margin-top:.6rem">🎭 موقعیت دو</p>
+    <p id="wl-vote-scenario-b" style="font-size:.88rem;color:#c0c0e0;line-height:1.5">...</p>
+  </div>
+  <p class="lbl" style="margin:.1rem 0 .05rem">به بامزه‌ترین جواب رأی بده 🗳</p>
+  <p class="hint" style="margin-bottom:.1rem">نمیتونی به خودت رأی بدی</p>
+  <div id="wl-vote-list"></div>
+  <div id="wl-voted-area" class="card tc hidden">
+    <p class="lbl" style="margin-bottom:.5rem">رأی دادی! منتظر بقیه...</p>
+    <div class="voter-dots" id="wl-voted-dots"></div>
+    <p id="wl-voted-count" class="hint" style="margin-top:.4rem"></p>
+  </div>
+</section>
+
+<!-- ── تساوی ─────────────────────────────── -->
+<section id="screen-wl-tiebreak" class="screen">
+  <div class="question-box" style="border-color:rgba(251,146,60,.35);background:rgba(251,146,60,.05)">
+    <p class="lbl" style="color:#fb923c">⚡ تساوی! دوباره رأی بده</p>
+    <p style="font-size:.88rem;color:#c0c0e0;margin-top:.35rem;line-height:1.5">آرای مساوی شد — از بین جواب‌های زیر یکی رو انتخاب کن:</p>
+  </div>
+  <div id="wl-tb-list"></div>
+  <div id="wl-tb-voted-area" class="card tc hidden">
+    <p class="lbl" style="margin-bottom:.5rem">رأی دادی! منتظر بقیه...</p>
+    <div class="voter-dots" id="wl-tb-voted-dots"></div>
+    <p id="wl-tb-voted-count" class="hint" style="margin-top:.4rem"></p>
+  </div>
+</section>
+
+<!-- ── نتیجه دور ──────────────────────────── -->
+<section id="screen-wl-reveal" class="screen" style="align-items:center">
+  <p class="lbl tc">برنده این دور 🏆</p>
+  <div id="wl-reveal-winner-card" class="who-winner-card pop" style="background:#facc15">
+    <div style="font-size:3rem">🎤</div>
+    <div id="wl-reveal-winner-name" class="who-winner-name" style="color:#0c0c0c">—</div>
+    <div id="wl-reveal-winner-votes" class="who-winner-votes" style="color:rgba(0,0,0,.55)"></div>
+  </div>
+  <div class="card" style="width:100%">
+    <p class="card-title">همه جواب‌ها</p>
+    <div id="wl-reveal-answers"></div>
+  </div>
+  <div class="card" style="width:100%">
+    <p class="card-title">امتیاز کل 🏆</p>
+    <div id="wl-reveal-scores"></div>
+  </div>
+  <button class="btn hidden" id="btn-wl-next">دور بعدی ←</button>
+  <p class="hint hidden" id="wl-next-wait">منتظر میزبان...</p>
+</section>
+
+<!-- ── پایان بازی خط کیه؟ ──────────────────── -->
+<section id="screen-wl-ended" class="screen" style="align-items:center">
+  <div id="wl-my-rank-card" class="my-rank-card pop"></div>
+  <div id="wl-winner-card" class="winner-card pop" style="width:100%">
+    <p class="wlbl">قهرمان خط کیه؟ 🎤</p>
+    <p id="wl-winner-name" class="wname">—</p>
+    <p id="wl-winner-pts" class="wscore">۰ رأی</p>
+  </div>
+  <div class="card" style="width:100%">
+    <p class="card-title">امتیاز نهایی</p>
+    <div id="wl-final-scores"></div>
+  </div>
+  <div id="wl-again-picker" class="rounds-row hidden" style="width:100%">
+    <span class="rounds-lbl">تعداد دورها</span>
+    <div class="rounds-ctrl">
+      <button class="rbtn" id="btn-wl-again-minus">−</button>
+      <span id="wl-again-val">۸</span>
+      <button class="rbtn" id="btn-wl-again-plus">+</button>
+    </div>
+  </div>
+  <button class="btn hidden" id="btn-wl-play-again">دوباره بازی! 🎤</button>
+  <p class="hint hidden" id="wl-ended-wait">منتظر میزبان...</p>
+  <button class="btn-ghost" id="btn-wl-exit">خروج از بازی</button>
+</section>
+
 </div>
 <div id="toast"></div>
 <div id="confetti-wrap"></div>
@@ -482,7 +866,14 @@ input.code-input{direction:ltr;text-align:center;font-weight:900;letter-spacing:
 <script>
 var ws=null,myId=null,myRoomId=null,myGuess=null;
 var selectedRounds=1,againRounds=1;
+var selectedWhoRounds=10,againWhoRounds=10;
+var selectedWlRounds=8,againWlRounds=8;
 var prevScores={};
+var myVote=null;           // who-game: player_id voted for this round
+var myWlVote=null;         // wl-game: target_id voted for this round
+var myWlTbVote=null;       // wl-game: target_id voted for in tiebreak
+var wlLastRound=-1;        // last rounds_played value seen in wl_writing — detects new rounds
+var currentMode='faztoumim';
 var SESS_KEY='faztoumim_v1';
 
 // ── Persian digits ──────────────────────────────────
@@ -514,6 +905,26 @@ document.getElementById('btn-rounds-minus').onclick=function(){if(selectedRounds
 document.getElementById('btn-rounds-plus').onclick=function(){if(selectedRounds<10){selectedRounds++;document.getElementById('rounds-val').textContent=fa(selectedRounds);}};
 document.getElementById('btn-again-minus').onclick=function(){if(againRounds>1){againRounds--;document.getElementById('again-rounds-val').textContent=fa(againRounds);}};
 document.getElementById('btn-again-plus').onclick=function(){if(againRounds<10){againRounds++;document.getElementById('again-rounds-val').textContent=fa(againRounds);}};
+document.getElementById('btn-who-rounds-minus').onclick=function(){if(selectedWhoRounds>1){selectedWhoRounds--;document.getElementById('who-rounds-val').textContent=fa(selectedWhoRounds);}};
+document.getElementById('btn-who-rounds-plus').onclick=function(){if(selectedWhoRounds<30){selectedWhoRounds++;document.getElementById('who-rounds-val').textContent=fa(selectedWhoRounds);}};
+document.getElementById('btn-who-again-minus').onclick=function(){if(againWhoRounds>1){againWhoRounds--;document.getElementById('who-again-val').textContent=fa(againWhoRounds);}};
+document.getElementById('btn-who-again-plus').onclick=function(){if(againWhoRounds<30){againWhoRounds++;document.getElementById('who-again-val').textContent=fa(againWhoRounds);}};
+document.getElementById('btn-wl-rounds-minus').onclick=function(){if(selectedWlRounds>1){selectedWlRounds--;document.getElementById('wl-rounds-val').textContent=fa(selectedWlRounds);}};
+document.getElementById('btn-wl-rounds-plus').onclick=function(){if(selectedWlRounds<20){selectedWlRounds++;document.getElementById('wl-rounds-val').textContent=fa(selectedWlRounds);}};
+document.getElementById('btn-wl-again-minus').onclick=function(){if(againWlRounds>1){againWlRounds--;document.getElementById('wl-again-val').textContent=fa(againWlRounds);}};
+document.getElementById('btn-wl-again-plus').onclick=function(){if(againWlRounds<20){againWlRounds++;document.getElementById('wl-again-val').textContent=fa(againWlRounds);}};
+
+// ── Mode selector ────────────────────────────────────
+function selectMode(mode){
+  currentMode=mode;
+  send({action:'set_mode',mode:mode});
+  document.getElementById('mode-faztoumim').classList.toggle('on',mode==='faztoumim');
+  document.getElementById('mode-who').classList.toggle('on',mode==='who');
+  document.getElementById('mode-wl').classList.toggle('on',mode==='wl');
+  document.getElementById('rounds-picker').classList.toggle('hidden',mode!=='faztoumim');
+  document.getElementById('who-rounds-picker').classList.toggle('hidden',mode!=='who');
+  document.getElementById('wl-rounds-picker').classList.toggle('hidden',mode!=='wl');
+}
 
 // ── Copy code ────────────────────────────────────────
 document.getElementById('btn-copy-code').onclick=function(){
@@ -634,9 +1045,15 @@ function render(s){
     myGuess=null;prevScores={};
     s.players.forEach(function(p){prevScores[p.id]=p.score;});
   }
-  if(s.state==='lobby')hideGameBar();
-  else if(s.state!=='ended')showGameBar(s.rounds_played,s.max_rounds,s.players,s.actor_id);
+  if(s.state==='who_voting'||s.state==='who_tiebreak')myVote=null;
+  if(s.state==='wl_writing')myWlVote=null;
 
+  var gameBarStates=['acting','guessing','reveal','who_preparing','who_voting','who_tiebreak','who_reveal',
+    'wl_writing','wl_voting','wl_tiebreak','wl_reveal'];
+  if(s.state==='lobby')hideGameBar();
+  else if(gameBarStates.indexOf(s.state)>=0)showGameBar(s.rounds_played,s.max_rounds,s.players,null);
+
+  // ── faztoumim ───────────────────────────────────────
   if     (s.state==='lobby'             )renderLobby(s);
   else if(s.state==='acting'  && am     )renderActing(s);
   else if(s.state==='acting'  && !am    )renderWatching(s);
@@ -644,6 +1061,18 @@ function render(s){
   else if(s.state==='guessing'&& am     )renderActorWait(s);
   else if(s.state==='reveal'            )renderReveal(s);
   else if(s.state==='ended'             )renderEnded(s);
+  // ── کدوم‌تون ────────────────────────────────────────
+  else if(s.state==='who_preparing'     )renderWhoPreparing(s);
+  else if(s.state==='who_voting'        )renderWhoVoting(s);
+  else if(s.state==='who_tiebreak'      )renderWhoTiebreak(s);
+  else if(s.state==='who_reveal'        )renderWhoReveal(s);
+  else if(s.state==='who_ended'         )renderWhoEnded(s);
+  // ── خط کیه؟ ─────────────────────────────────────────
+  else if(s.state==='wl_writing'        )renderWlWriting(s);
+  else if(s.state==='wl_voting'         )renderWlVoting(s);
+  else if(s.state==='wl_tiebreak'       )renderWlTiebreak(s);
+  else if(s.state==='wl_reveal'         )renderWlReveal(s);
+  else if(s.state==='wl_ended'          )renderWlEnded(s);
 }
 
 function renderLobby(s){
@@ -658,15 +1087,387 @@ function renderLobby(s){
       +'</div>';
   }).join('');
   var isHost=myId===s.host_id;
-  var btn=document.getElementById('btn-start'),hint=document.getElementById('lobby-hint'),picker=document.getElementById('rounds-picker');
+  var btn=document.getElementById('btn-start'),hint=document.getElementById('lobby-hint');
+  var modePicker=document.getElementById('mode-picker');
   if(isHost){
-    btn.style.display='';picker.classList.remove('hidden');
+    btn.style.display='';modePicker.classList.remove('hidden');
     btn.disabled=s.players.length<2;
     hint.textContent=s.players.length<2?'حداقل ۲ نفر لازمه':'آماده‌ای؟ شروع کن!';
+    // sync mode from server state
+    currentMode=s.game_mode||'faztoumim';
+    document.getElementById('mode-faztoumim').classList.toggle('on',currentMode==='faztoumim');
+    document.getElementById('mode-who').classList.toggle('on',currentMode==='who');
+    document.getElementById('mode-wl').classList.toggle('on',currentMode==='wl');
+    document.getElementById('rounds-picker').classList.toggle('hidden',currentMode!=='faztoumim');
+    document.getElementById('who-rounds-picker').classList.toggle('hidden',currentMode!=='who');
+    document.getElementById('wl-rounds-picker').classList.toggle('hidden',currentMode!=='wl');
   }else{
-    btn.style.display='none';picker.classList.add('hidden');
+    btn.style.display='none';modePicker.classList.add('hidden');
+    document.getElementById('rounds-picker').classList.add('hidden');
+    document.getElementById('who-rounds-picker').classList.add('hidden');
+    document.getElementById('wl-rounds-picker').classList.add('hidden');
     hint.textContent='منتظر میزبان برای شروع...';
   }
+}
+
+// ── WHO render functions ─────────────────────────────
+
+function whoVoteDots(players,votedIds,containerId){
+  document.getElementById(containerId).innerHTML=players.map(function(p){
+    var done=(votedIds||[]).indexOf(p.id)>=0;
+    return '<div class="vdot '+(done?'done':'pending')+'" style="background:'+pcolor(players,p.id)+'">'+p.name.charAt(0)+'</div>';
+  }).join('');
+}
+
+function shameList(players,shame,containerId){
+  var sorted=[].concat(players).sort(function(a,b){return (shame[b.id]||0)-(shame[a.id]||0);});
+  document.getElementById(containerId).innerHTML=sorted.map(function(p,i){
+    var sc=shame[p.id]||0;
+    var isTop=i===0&&sc>0;
+    return '<div class="shame-row'+(isTop?' top':'')+'">'
+      +(sc>0?'<span class="shame-fire">'+'🔥'.repeat(Math.min(sc,5))+'</span>':'<span class="shame-fire" style="opacity:.2">—</span>')
+      +'<span class="shame-name">'+p.name+(p.id===myId?' <span class="badge-you">(تو)</span>':'')+'</span>'
+      +'<span class="shame-count">'+fa(sc)+' بار</span>'
+      +'</div>';
+  }).join('');
+}
+
+function buildVoteGrid(players,votedIds,myVoteId,gridId,onVote,isTiebreak,tiedIds){
+  var targets=isTiebreak?players.filter(function(p){return (tiedIds||[]).indexOf(p.id)>=0;}):players;
+  var grid=document.getElementById(gridId);
+  grid.innerHTML=targets.map(function(p,i){
+    return '<button class="vote-btn'+(myVoteId===p.id?' chosen':'')+'" style="animation:vbtnIn .2s '+(i*.04)+'s both" data-tid="'+p.id+'">'
+      +'<div class="vote-av" style="background:'+pcolor(players,p.id)+'">'+p.name.charAt(0)+'</div>'
+      +'<span class="vote-name">'+p.name+'</span>'
+      +'</button>';
+  }).join('');
+  if(!myVoteId&&onVote){
+    grid.querySelectorAll('.vote-btn').forEach(function(b){
+      b.addEventListener('click',function(){
+        myVote=b.dataset.tid;
+        grid.querySelectorAll('.vote-btn').forEach(function(x){x.classList.add('dimmed');});
+        b.classList.remove('dimmed');b.classList.add('chosen');
+        onVote(myVote);
+      },{once:true});
+    });
+  }
+}
+
+function renderWhoPreparing(s){
+  show('who-preparing');
+  var isHost=myId===s.host_id;
+  document.getElementById('who-prep-host').classList.toggle('hidden',!isHost);
+  document.getElementById('who-prep-others').classList.toggle('hidden',isHost);
+  if(isHost&&s.who_question){
+    document.getElementById('who-prep-question').textContent=s.who_question;
+    document.getElementById('who-custom-q').value='';
+  }
+}
+
+function renderWhoVoting(s){
+  show('who-voting');
+  document.getElementById('who-voting-question').textContent=s.who_question;
+  var votedArea=document.getElementById('who-voted-area');
+  var alreadyVoted=myVote||(s.my_vote)||(s.who_voted_ids&&s.who_voted_ids.indexOf(myId)>=0);
+  whoVoteDots(s.players,s.who_voted_ids||[],'who-voted-dots');
+  document.getElementById('who-voted-text').textContent=fa(s.who_votes_count)+' از '+fa(s.players.length)+' رأی دادن';
+  buildVoteGrid(s.players,s.who_voted_ids||[],alreadyVoted?myVote:null,'who-vote-grid',
+    function(tid){
+      send({action:'who_vote',target_id:tid});
+      // show voted state inline (avoid overriding reveal)
+      document.getElementById('who-vote-grid').innerHTML='';
+      document.getElementById('who-voted-text').textContent='رأی دادی! منتظر بقیه...';
+      whoVoteDots(s.players,[].concat(s.who_voted_ids||[]).concat([myId]),'who-voted-dots');
+      votedArea.classList.remove('hidden');
+    },false,null);
+  if(alreadyVoted){
+    document.getElementById('who-vote-grid').innerHTML='';
+    votedArea.classList.remove('hidden');
+  }else{
+    votedArea.classList.add('hidden');
+  }
+}
+
+function renderWhoTiebreak(s){
+  show('who-tiebreak');
+  document.getElementById('who-tb-question').textContent=s.who_question;
+  var votedArea=document.getElementById('who-tb-voted-area');
+  var alreadyVoted=myVote||(s.my_vote)||(s.who_voted_ids&&s.who_voted_ids.indexOf(myId)>=0);
+  whoVoteDots(s.players,s.who_voted_ids||[],'who-tb-voted-dots');
+  document.getElementById('who-tb-voted-text').textContent=fa(s.who_votes_count)+' از '+fa(s.players.length)+' رأی دادن';
+  buildVoteGrid(s.players,s.who_voted_ids||[],alreadyVoted?myVote:null,'who-tb-grid',
+    function(tid){
+      send({action:'who_tiebreak_vote',target_id:tid});
+      document.getElementById('who-tb-grid').innerHTML='';
+      document.getElementById('who-tb-voted-text').textContent='رأی دادی! منتظر بقیه...';
+      whoVoteDots(s.players,[].concat(s.who_voted_ids||[]).concat([myId]),'who-tb-voted-dots');
+      votedArea.classList.remove('hidden');
+    },true,s.who_tied||[]);
+  if(alreadyVoted){
+    document.getElementById('who-tb-grid').innerHTML='';
+    votedArea.classList.remove('hidden');
+  }else{
+    votedArea.classList.add('hidden');
+  }
+}
+
+function renderWhoReveal(s){
+  show('who-reveal');
+  var wids=s.who_winner_ids||[];
+  var wnames=wids.map(function(wid){var p=s.players.find(function(x){return x.id===wid;});return p?p.name:'?';});
+  var wcard=document.getElementById('who-winner-card');
+  var wcolor=wids.length>0?pcolor(s.players,wids[0]):'#818cf8';
+  wcard.style.background=wcolor;
+  wcard.style.boxShadow='0 0 0 1px rgba(255,255,255,.07),0 24px 60px '+wcolor+'44';
+  wcard.classList.remove('pop');void wcard.offsetWidth;wcard.classList.add('pop');
+  document.getElementById('who-winner-name').textContent=wnames.join(' و ');
+  document.getElementById('who-winner-votes').textContent=fa(s.who_winner_votes||0)+' رأی گرفت 😬';
+  // breakdown
+  document.getElementById('who-breakdown').innerHTML=(s.who_breakdown||[]).map(function(b){
+    return '<div class="breakdown-row">'
+      +'<span class="br-voter">'+b.voter+'</span>'
+      +'<span class="br-arrow">رأی داد به</span>'
+      +'<span class="br-target">'+b.target+'</span>'
+      +'</div>';
+  }).join('');
+  shameList(s.players,s.who_shame||{},'who-shame-list');
+  var isHost=myId===s.host_id,isLast=s.rounds_played>=s.max_rounds-1;
+  var nb=document.getElementById('btn-who-next'),wh=document.getElementById('who-next-wait');
+  if(isHost){nb.textContent=isLast?'نتیجه نهایی 🏆':'سوال بعدی ←';nb.classList.remove('hidden');wh.classList.add('hidden');}
+  else{nb.classList.add('hidden');wh.classList.remove('hidden');}
+}
+
+function renderWhoEnded(s){
+  show('who-ended');
+  launchConfetti();
+  var shame=s.who_shame||{};
+  var sorted=[].concat(s.players).sort(function(a,b){return (shame[b.id]||0)-(shame[a.id]||0);});
+  var loser=sorted[0];
+  var lcard=document.getElementById('who-loser-card');
+  lcard.classList.remove('pop');void lcard.offsetWidth;lcard.classList.add('pop');
+  document.getElementById('who-loser-name').textContent=loser?loser.name:'—';
+  document.getElementById('who-loser-count').textContent=loser?fa(shame[loser.id]||0)+' بار انتخاب شد':'';
+  shameList(s.players,shame,'who-final-shame');
+  var isHost=myId===s.host_id;
+  document.getElementById('btn-who-play-again').classList.toggle('hidden',!isHost);
+  document.getElementById('who-ended-wait').classList.toggle('hidden',isHost);
+  document.getElementById('who-again-picker').classList.toggle('hidden',!isHost);
+}
+
+// ── خط کیه؟ render functions ────────────────────────
+
+var LABELS=['A','B','C','D','E','F','G','H'];
+
+function renderWlWriting(s){
+  // isNewRound is the ONLY signal that triggers a screen transition + textarea clear.
+  // Subsequent broadcasts within the same round (someone else submitting) must never
+  // disrupt what this player is currently typing.
+  var isNewRound=s.rounds_played!==wlLastRound;
+  if(isNewRound){
+    wlLastRound=s.rounds_played;
+    myWlVote=null;
+    myWlTbVote=null;
+    show('wl-writing');
+    document.getElementById('wl-scenario-a').textContent=s.wl_scenario_a||'...';
+    document.getElementById('wl-scenario-b').textContent=s.wl_scenario_b||'...';
+  }
+  var submitted=!!(s.wl_my_answer||(s.wl_submitted_ids&&s.wl_submitted_ids.indexOf(myId)>=0));
+  document.getElementById('wl-input-area').classList.toggle('hidden',submitted);
+  document.getElementById('wl-writing-submitted').classList.toggle('hidden',!submitted);
+  if(!submitted&&isNewRound){
+    var inp=document.getElementById('wl-answer-input');
+    inp.value='';
+    setTimeout(function(){inp.focus&&inp.focus();},120);
+  }
+  // Always update dots + counter silently
+  document.getElementById('wl-write-dots').innerHTML=s.players.map(function(p){
+    var done=(s.wl_submitted_ids||[]).indexOf(p.id)>=0;
+    return '<div class="vdot '+(done?'done':'pending')+'" style="background:'+pcolor(s.players,p.id)+'">'+p.name.charAt(0)+'</div>';
+  }).join('');
+  document.getElementById('wl-write-count').textContent=fa(s.wl_submitted_count||0)+' از '+fa(s.players.length)+' نوشتن';
+  var isHost=myId===s.host_id;
+  document.getElementById('wl-host-skip').classList.toggle(
+    'hidden',!(isHost&&(s.wl_submitted_count||0)>=Math.max(2,s.players.length-1))
+  );
+}
+
+function renderWlVoting(s){
+  var alreadyActive=document.getElementById('screen-wl-voting').classList.contains('active');
+  var alreadyVoted=!!(myWlVote||(s.wl_my_vote)||(s.wl_voted_ids&&s.wl_voted_ids.indexOf(myId)>=0));
+  // Always silently update dots + counter — never skip this
+  document.getElementById('wl-voted-dots').innerHTML=s.players.map(function(p){
+    var done=(s.wl_voted_ids||[]).indexOf(p.id)>=0;
+    return '<div class="vdot '+(done?'done':'pending')+'" style="background:'+pcolor(s.players,p.id)+'">'+p.name.charAt(0)+'</div>';
+  }).join('');
+  document.getElementById('wl-voted-count').textContent=fa((s.wl_voted_ids||[]).length)+' از '+fa(s.players.length)+' رأی دادن';
+  var votedArea=document.getElementById('wl-voted-area');
+  if(alreadyVoted){
+    votedArea.classList.remove('hidden');
+    if(!alreadyActive)show('wl-voting');
+    return; // keep chosen-card state intact, only dots updated above
+  }
+  votedArea.classList.add('hidden');
+  if(alreadyActive)return; // cards already in DOM with listeners — don't rebuild
+  // First entry to voting phase: build the screen
+  show('wl-voting');
+  document.getElementById('wl-vote-scenario-a').textContent=s.wl_scenario_a||'...';
+  document.getElementById('wl-vote-scenario-b').textContent=s.wl_scenario_b||'...';
+  var answers=s.wl_answer_list||[];
+  var myAnswerId=s.wl_my_answer_id||null;
+  var list=document.getElementById('wl-vote-list');
+  list.innerHTML=answers.map(function(a,i){
+    var isMine=a.id===myAnswerId;
+    return '<div class="wl-answer-card'+(isMine?' mine':'')+'" style="animation:wlCardIn .25s '+(i*.06)+'s both" data-tid="'+a.id+'">'
+      +'<div class="wl-ans-label">'+LABELS[i]+'</div>'
+      +'<div class="wl-ans-body"><div class="wl-ans-text">'+escHtml(a.text)+'</div>'
+      +(isMine?'<div class="wl-ans-author">جواب توئه</div>':'')
+      +'</div></div>';
+  }).join('');
+  list.querySelectorAll('.wl-answer-card:not(.mine)').forEach(function(card){
+    card.addEventListener('click',function(){
+      myWlVote=card.dataset.tid;
+      list.querySelectorAll('.wl-answer-card').forEach(function(c){c.classList.add('dimmed');});
+      card.classList.remove('dimmed');card.classList.add('chosen');
+      list.innerHTML='';
+      document.getElementById('wl-voted-count').textContent='رأی دادی! منتظر بقیه...';
+      document.getElementById('wl-voted-dots').innerHTML=s.players.map(function(p){
+        var done=(s.wl_voted_ids||[]).indexOf(p.id)>=0||(p.id===myId);
+        return '<div class="vdot '+(done?'done':'pending')+'" style="background:'+pcolor(s.players,p.id)+'">'+p.name.charAt(0)+'</div>';
+      }).join('');
+      votedArea.classList.remove('hidden');
+      send({action:'wl_vote',target_id:myWlVote});
+    },{once:true});
+  });
+}
+
+function renderWlTiebreak(s){
+  var alreadyActive=document.getElementById('screen-wl-tiebreak').classList.contains('active');
+  var alreadyVoted=!!(myWlTbVote||(s.wl_my_vote)||(s.wl_voted_ids&&s.wl_voted_ids.indexOf(myId)>=0));
+  // Always update dots silently
+  document.getElementById('wl-tb-voted-dots').innerHTML=s.players.map(function(p){
+    var done=(s.wl_voted_ids||[]).indexOf(p.id)>=0;
+    return '<div class="vdot '+(done?'done':'pending')+'" style="background:'+pcolor(s.players,p.id)+'">'+p.name.charAt(0)+'</div>';
+  }).join('');
+  document.getElementById('wl-tb-voted-count').textContent=fa((s.wl_voted_ids||[]).length)+' از '+fa(s.players.length)+' رأی دادن';
+  var tbArea=document.getElementById('wl-tb-voted-area');
+  if(alreadyVoted){
+    tbArea.classList.remove('hidden');
+    if(!alreadyActive)show('wl-tiebreak');
+    return;
+  }
+  tbArea.classList.add('hidden');
+  if(alreadyActive)return;
+  show('wl-tiebreak');
+  var answers=s.wl_answer_list||[];
+  var myAnswerId=s.wl_my_answer_id||null;
+  var list=document.getElementById('wl-tb-list');
+  list.innerHTML=answers.map(function(a,i){
+    var isMine=a.id===myAnswerId;
+    return '<div class="wl-answer-card'+(isMine?' mine':'')+'" style="animation:wlCardIn .25s '+(i*.06)+'s both;border-color:rgba(251,146,60,.3)" data-tid="'+a.id+'">'
+      +'<div class="wl-ans-label" style="background:rgba(251,146,60,.15);color:#fb923c">'+LABELS[i]+'</div>'
+      +'<div class="wl-ans-body"><div class="wl-ans-text">'+escHtml(a.text)+'</div>'
+      +(isMine?'<div class="wl-ans-author">جواب توئه</div>':'')
+      +'</div></div>';
+  }).join('');
+  list.querySelectorAll('.wl-answer-card:not(.mine)').forEach(function(card){
+    card.addEventListener('click',function(){
+      myWlTbVote=card.dataset.tid;
+      list.querySelectorAll('.wl-answer-card').forEach(function(c){c.classList.add('dimmed');});
+      card.classList.remove('dimmed');card.classList.add('chosen');
+      list.innerHTML='';
+      document.getElementById('wl-tb-voted-count').textContent='رأی دادی! منتظر بقیه...';
+      tbArea.classList.remove('hidden');
+      send({action:'wl_tiebreak_vote',target_id:myWlTbVote});
+    },{once:true});
+  });
+}
+
+function renderWlReveal(s){
+  show('wl-reveal');
+  var answers=s.wl_answer_list||[];
+  var winnerIds=s.wl_round_winner_ids||[];
+  var maxVotes=s.wl_round_max_votes||0;
+  // winner card
+  var wcard=document.getElementById('wl-reveal-winner-card');
+  wcard.classList.remove('pop');void wcard.offsetWidth;wcard.classList.add('pop');
+  var wnames=winnerIds.map(function(wid){
+    var p=s.players.find(function(x){return x.id===wid;});
+    return p?p.name:'؟';
+  });
+  document.getElementById('wl-reveal-winner-name').textContent=maxVotes>0?wnames.join(' و '):'تساوی بدون رأی';
+  var voteLabel=s.wl_had_tiebreak?fa(maxVotes)+' رأی گرفت (بعد از تساوی ⚡)':fa(maxVotes)+' رأی گرفت 🗳';
+  document.getElementById('wl-reveal-winner-votes').textContent=maxVotes>0?voteLabel:'';
+  // answers with reveal
+  document.getElementById('wl-reveal-answers').innerHTML=answers.map(function(a,i){
+    var isWinner=winnerIds.indexOf(a.id)>=0&&maxVotes>0;
+    return '<div class="wl-answer-card'+(isWinner?' winner-highlight':'')+'" style="animation:wlCardIn .3s '+(i*.07)+'s both;cursor:default">'
+      +'<div class="wl-ans-label">'+(isWinner?'🏆':LABELS[i])+'</div>'
+      +'<div class="wl-ans-body">'
+      +'<div class="wl-ans-text">'+escHtml(a.text)+'</div>'
+      +'<div class="wl-ans-meta">'
+      +'<span class="wl-ans-author">✍️ '+a.author+'</span>'
+      +'<span class="wl-ans-votes">'+fa(a.votes)+' رأی</span>'
+      +'</div></div></div>';
+  }).join('');
+  // cumulative scores
+  wlScoreList(s.players,s.wl_scores||{},'wl-reveal-scores',winnerIds);
+  var isHost=myId===s.host_id;
+  var isLast=s.rounds_played>=s.max_rounds-1;
+  var nb=document.getElementById('btn-wl-next'),wh=document.getElementById('wl-next-wait');
+  if(isHost){nb.textContent=isLast?'نتیجه نهایی 🏆':'دور بعدی ←';nb.classList.remove('hidden');wh.classList.add('hidden');}
+  else{nb.classList.add('hidden');wh.classList.remove('hidden');}
+}
+
+function renderWlEnded(s){
+  show('wl-ended');hideGameBar();
+  launchConfetti();
+  var scores=s.wl_scores||{};
+  var sorted=[].concat(s.players).sort(function(a,b){return (scores[b.id]||0)-(scores[a.id]||0);});
+  var w=sorted[0];
+  var myRank=sorted.findIndex(function(p){return p.id===myId;})+1;
+  var myPlayer=myRank>0?sorted[myRank-1]:null;
+  // personal rank
+  var rankStyles=[
+    {bg:'linear-gradient(135deg,#f59e0b,#fbbf24)',emoji:'🥇',txt:'قهرمان!'},
+    {bg:'linear-gradient(135deg,#64748b,#94a3b8)',emoji:'🥈',txt:'نقره!'},
+    {bg:'linear-gradient(135deg,#92400e,#b45309)',emoji:'🥉',txt:'برنز!'},
+  ];
+  var rs=myRank>=1&&myRank<=3?rankStyles[myRank-1]:{bg:'rgba(255,255,255,.06)',emoji:'',txt:'بازی تموم شد'};
+  var mrc=document.getElementById('wl-my-rank-card');
+  mrc.style.background=rs.bg;
+  mrc.classList.remove('pop');void mrc.offsetWidth;mrc.classList.add('pop');
+  mrc.innerHTML='<div class="rank-lbl">نتیجه تو</div>'
+    +(rs.emoji?'<div style="font-size:2.6rem;line-height:1;margin:.2rem 0">'+rs.emoji+'</div>':'')
+    +'<div class="rank-num">رتبه '+fa(myRank)+'</div>'
+    +(myPlayer?'<div class="rank-score">'+fa(scores[myPlayer.id]||0)+' رأی</div>':'');
+  // winner card
+  var wc=document.getElementById('wl-winner-card');
+  wc.style.backgroundImage='linear-gradient(135deg,#f59e0b,#fbbf24,#f59e0b)';
+  wc.classList.remove('pop');void wc.offsetWidth;wc.classList.add('pop');
+  document.getElementById('wl-winner-name').textContent=w?w.name:'—';
+  document.getElementById('wl-winner-pts').textContent=fa(scores[w?w.id:'']||0)+' رأی';
+  // leaderboard
+  wlScoreList(s.players,scores,'wl-final-scores',[w?w.id:'']);
+  var isHost=myId===s.host_id;
+  document.getElementById('btn-wl-play-again').classList.toggle('hidden',!isHost);
+  document.getElementById('wl-ended-wait').classList.toggle('hidden',isHost);
+  document.getElementById('wl-again-picker').classList.toggle('hidden',!isHost);
+}
+
+function wlScoreList(players,scores,elId,highlightIds){
+  var sorted=[].concat(players).sort(function(a,b){return (scores[b.id]||0)-(scores[a.id]||0);});
+  document.getElementById(elId).innerHTML=sorted.map(function(p,i){
+    var hl=(highlightIds||[]).indexOf(p.id)>=0;
+    return '<div class="wl-ranking-row'+(hl?' hl':'')+'" style="animation:rowSlide .3s '+(i*.06)+'s both">'
+      +'<span class="wl-rank-pts">'+fa(scores[p.id]||0)+' رأی</span>'
+      +'<span class="wl-rank-name">'+p.name+(p.id===myId?' <span class="badge-you">(تو)</span>':'')+'</span>'
+      +'<span class="wl-rank-num">'+fa(i+1)+'</span>'
+      +'</div>';
+  }).join('');
+}
+
+function escHtml(s){
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
 function renderActing(s){
@@ -830,10 +1631,40 @@ document.getElementById('btn-join').onclick=async function(){
   myId=d.player_id;myRoomId=d.room_id;saveSession(myRoomId,myId);connectWS(myRoomId,myId);
 };
 document.getElementById('join-code').addEventListener('keydown',function(e){if(e.key==='Enter')document.getElementById('btn-join').click();});
-document.getElementById('btn-start').onclick=function(){send({action:'start',rounds_per_player:selectedRounds});};
+document.getElementById('btn-start').onclick=function(){
+  if(currentMode==='who') send({action:'start',rounds:selectedWhoRounds});
+  else if(currentMode==='wl') send({action:'start',rounds:selectedWlRounds});
+  else send({action:'start',rounds_per_player:selectedRounds});
+};
 document.getElementById('btn-actor-done').onclick=function(){send({action:'actor_done'});};
 document.getElementById('btn-next-round').onclick=function(){send({action:'next_round'});};
 document.getElementById('btn-play-again').onclick=function(){send({action:'play_again',rounds_per_player:againRounds});};
+document.getElementById('btn-who-launch').onclick=function(){
+  var q=document.getElementById('who-custom-q').value.trim();
+  send({action:'who_launch',custom_q:q});
+};
+document.getElementById('btn-who-next').onclick=function(){send({action:'who_next'});};
+document.getElementById('btn-who-play-again').onclick=function(){send({action:'who_play_again',rounds:againWhoRounds});};
+document.getElementById('btn-who-exit').onclick=doExit;
+
+// ── خط کیه؟ buttons ─────────────────────────────────
+document.getElementById('btn-wl-submit').onclick=function(){
+  var txt=document.getElementById('wl-answer-input').value.trim();
+  if(!txt){toast('یه چیزی بنویس!');return;}
+  send({action:'wl_submit_answer',answer:txt});
+  document.getElementById('wl-input-area').classList.add('hidden');
+  document.getElementById('wl-writing-submitted').classList.remove('hidden');
+  document.getElementById('wl-host-skip').classList.add('hidden');
+};
+document.getElementById('wl-answer-input').addEventListener('keydown',function(e){
+  if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();document.getElementById('btn-wl-submit').click();}
+});
+document.getElementById('btn-wl-skip-to-vote').onclick=function(){
+  send({action:'wl_move_to_vote'});
+};
+document.getElementById('btn-wl-next').onclick=function(){send({action:'wl_next'});};
+document.getElementById('btn-wl-play-again').onclick=function(){send({action:'wl_play_again',rounds:againWlRounds});};
+document.getElementById('btn-wl-exit').onclick=doExit;
 
 function showErr(msg){
   var el=document.getElementById('home-error');

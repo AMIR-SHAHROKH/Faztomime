@@ -65,10 +65,21 @@ async def ws_endpoint(ws: WebSocket, room_id: str, player_id: str):
             data = await ws.receive_json()
             action = data.get("action")
 
-            if action == "start":
+            if action == "set_mode":
+                if room.state == "lobby" and player_id == room.host_id():
+                    room.game_mode = data.get("mode", "faztoumim")
+                    await broadcast(room_id)
+
+            elif action == "start":
                 if room.state == "lobby" and len(room.players) >= 2 and player_id == room.host_id():
-                    rpp = int(data.get("rounds_per_player", 1))
-                    room.begin_game(rpp)
+                    if room.game_mode == "who":
+                        room.start_who(int(data.get("rounds", 10)))
+                    elif room.game_mode == "wl":
+                        room.start_wl(int(data.get("rounds", 8)))
+                    else:
+                        room.game_mode = "faztoumim"
+                        rpp = int(data.get("rounds_per_player", 1))
+                        room.begin_game(rpp)
                     await broadcast(room_id)
 
             elif action == "actor_done":
@@ -93,6 +104,76 @@ async def ws_endpoint(ws: WebSocket, room_id: str, player_id: str):
                 if room.state == "ended" and player_id == room.host_id():
                     rpp = int(data.get("rounds_per_player", 1))
                     room.play_again(rpp)
+                    await broadcast(room_id)
+
+            # ── کدوم‌تون بیشتر actions ────────────────
+            elif action == "who_launch":
+                if room.state == "who_preparing" and player_id == room.host_id():
+                    room.who_launch(data.get("custom_q", ""))
+                    await broadcast(room_id)
+
+            elif action == "who_vote":
+                if room.state == "who_voting":
+                    all_in = room.who_vote(player_id, data.get("target_id", ""))
+                    if all_in:
+                        room.who_reveal()
+                    await broadcast(room_id)
+
+            elif action == "who_tiebreak_vote":
+                if room.state == "who_tiebreak":
+                    all_in = room.who_tiebreak_vote(player_id, data.get("target_id", ""))
+                    if all_in:
+                        room.who_tiebreak_reveal()
+                    await broadcast(room_id)
+
+            elif action == "who_next":
+                if room.state == "who_reveal" and player_id == room.host_id():
+                    room.who_next()
+                    await broadcast(room_id)
+
+            elif action == "who_play_again":
+                if room.state == "who_ended" and player_id == room.host_id():
+                    room.who_play_again(int(data.get("rounds", 10)))
+                    await broadcast(room_id)
+
+            # ── خط کیه؟ actions ──────────────────────────
+            elif action == "wl_submit_answer":
+                if room.state == "wl_writing":
+                    all_in = room.wl_submit(player_id, data.get("answer", ""))
+                    if all_in:
+                        room.wl_move_to_vote()
+                    await broadcast(room_id)
+
+            elif action == "wl_move_to_vote":
+                if room.state == "wl_writing" and player_id == room.host_id():
+                    if room.wl_answers:
+                        room.wl_move_to_vote()
+                    else:
+                        room.wl_next()
+                    await broadcast(room_id)
+
+            elif action == "wl_vote":
+                if room.state == "wl_voting":
+                    all_in = room.wl_vote(player_id, data.get("target_id", ""))
+                    if all_in:
+                        room.wl_do_reveal()
+                    await broadcast(room_id)
+
+            elif action == "wl_tiebreak_vote":
+                if room.state == "wl_tiebreak":
+                    all_in = room.wl_tiebreak_vote(player_id, data.get("target_id", ""))
+                    if all_in:
+                        room.wl_tiebreak_reveal()
+                    await broadcast(room_id)
+
+            elif action == "wl_next":
+                if room.state == "wl_reveal" and player_id == room.host_id():
+                    room.wl_next()
+                    await broadcast(room_id)
+
+            elif action == "wl_play_again":
+                if room.state == "wl_ended" and player_id == room.host_id():
+                    room.wl_play_again(int(data.get("rounds", 8)))
                     await broadcast(room_id)
 
             elif action == "exit":
